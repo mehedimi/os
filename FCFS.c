@@ -28,10 +28,12 @@ int main(){
             printf("Process 1 waiting time: 0\n");
             continue;
         }
-        waitingTime = (processes[i - 1].burstTime + avgWaititngTime);
+        
+        waitingTime += processes[i - 1].burstTime;
         printf("Process %d waiting time: %f\n", (i + 1), waitingTime);
-    
-        avgWaititngTime += waitingTime;
+
+        avgWaititngTime = (waitingTime + avgWaititngTime);
+
     }
     printf("\n");
     printf("\nAverage waiting time: %f\n", countAvgWaitingTime(avgWaititngTime, processCount));
