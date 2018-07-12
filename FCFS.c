@@ -11,7 +11,7 @@ float countAvgWaitingTime(float avg, int count){
 
 int main(){
     int processCount = 0, i;
-    float avgWaititngTime = 0.0, waitingTime;
+    float avgWaititngTime = 0.0, waitingTime = 0.0;
 
     struct Process processes[100];
     
