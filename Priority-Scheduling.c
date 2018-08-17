@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-typedef struct Process
-{
+typedef struct Process{
     int burstTime;
-    int arrivalTime;
+    int priority;
     int processNumber;
 } Process;
 
@@ -17,37 +16,37 @@ int main(){
 
     Process processes[100];
     Process temp;
-    
+
     printf("Enter process count:");
     scanf("%d", &processCount);
     printf("---- Enter Process Information ---- \n\n");
-    for(i = 0; i < processCount; i++){
-        printf("Enter process %d burst time: ", i+1);
+    for (i = 0; i < processCount; i++){
+        printf("Enter process %d burst time: ", i + 1);
         scanf("%d", &processes[i].burstTime);
-        printf("Enter process %d arrival time: ", i+1);
-        scanf("%d", &processes[i].arrivalTime);
+        printf("Enter process %d priority: ", i + 1);
+        scanf("%d", &processes[i].priority);
         processes[i].processNumber = (i + 1);
         printf("\n");
     }
 
-    for(i = 0; i < processCount; i++){
-        for(j = 0; j < (processCount - i - 1); j++){
-            if(processes[j].arrivalTime > processes[j + 1].arrivalTime){
+    for (i = 0; i < processCount; i++){
+        for (j = 0; j < (processCount - i - 1); j++){
+            if (processes[j].priority > processes[j + 1].priority){
                 temp = processes[j];
                 processes[j] = processes[j + 1];
-                processes[j+1] = temp;
+                processes[j + 1] = temp;
             }
         }
     }
 
-    printf("Process Name  Arrival Time  Burst Time Waiting Time\n");
-    for(i = 0; i < processCount; i++){
-        if(i == 0){
-            printf("P%d\t\t%d\t\t%d\t%f\n", processes[i].processNumber, processes[i].arrivalTime, processes[i].burstTime, 0.0);
+    printf("Process Name Burst Time Waiting Time\n");
+    for (i = 0; i < processCount; i++){
+        if (i == 0){
+            printf("P%d\t\t%d\t%f\n", processes[i].processNumber, processes[i].burstTime, 0.0);
             continue;
         }
         waitingTime += processes[i - 1].burstTime;
-        printf("P%d\t\t%d\t\t%d\t%f\n", processes[i].processNumber, processes[i].arrivalTime, processes[i].burstTime, waitingTime);
+        printf("P%d\t\t%d\t%f\n", processes[i].processNumber, processes[i].burstTime, waitingTime);
         avgWaititngTime = (waitingTime + avgWaititngTime);
     }
     printf("\n");
